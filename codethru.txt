@@ -1,0 +1,9 @@
+1)npm init to make package.json file (basically whats inside your nodejs app)
+2) public folder means that the files inside this directory are publicly available to the users from the url
+3) navigator api function -- geolocaate function that can be called , can combine with previous 
+
+
+
+
+HTTP POST
+1) routing 

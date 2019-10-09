@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Data selfie app</h1>
+    <p>why the fuk u here boy</p>
+    
+    <p>latitiude : <span id="lat"></span>&deg;<br>
+        longitude: <span id="lon"></span>&deg; <br>
+    </p>
+    <script>
+    if ("geolocation" in navigator) {
+  //console.log('its avaialble');/* geolocation is available */
+  navigator.geolocation.getCurrentPosition(async function(position) {   //using async await here as it takes time to retrive geolocation and post is only carried out when it is done
+  const { latitude, longitude} = position.coords;                       //using the position as the function variable, put it to const using js destructuring
+
+  document.getElementById('lat').textContent = latitude.toFixed(2);
+  document.getElementById('lon').textContent = longitude.toFixed(2);
+
+  const data = { latitude, longitude };
+
+  const options = {      
+    method : 'POST',
+    body : JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+
+  };
+
+  const response = await fetch('/api', options) ; //the response from the post  (confusing cos fetch is for POST as well)
+  const jsonResponse = await response.json();   //using const so as to not accidentally repeat using variable
+  console.log(jsonResponse);
+   
+  
+});
+
+//arrow funciton
+/* navigator.geolocation.getCurrentPosition(position => {
+  console.log(position.coords.latitude)
+  console.log(position.coords.longitude);
+}); */
+
+} else {
+  
+  console.log('not avail');  /* geolocation IS NOT available */
+}
+    
+    
+    </script>
+    
+</body>
+</html>
